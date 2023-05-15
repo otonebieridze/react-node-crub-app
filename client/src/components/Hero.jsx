@@ -1,16 +1,37 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
 
-function Hero() {
+function Hero({ setData, defaultValues, setDefaultValues, isFormEdited, setIsFormEdited }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
-    defaultValues: {
-      gender: "",
-    },
+    defaultValues: defaultValues,
   });
-  const onSubmit = (data) => console.log(data);
+
+  useEffect(() => {
+    reset(defaultValues);
+  }, [defaultValues, reset]);
+
+  const onSubmit = (data) => {
+    if (isFormEdited) {
+      axios.put(`http://localhost:4001/users/${data.id}`, data);
+      setIsFormEdited(false);
+    } else {
+      axios.post("http://localhost:4001/users", data);
+    }
+
+    setDefaultValues({
+      name: "",
+      age: "",
+      email: "",
+      gender: ""
+    })
+  };
 
   return (
     <form
@@ -112,12 +133,40 @@ function Hero() {
         </div>
       </div>
 
-      <button
-        type="submit"
-        className="w-28 h-9 rounded-lg bg-green-800 text-white mt-16 mb-10"
-      >
-        Add Data
-      </button>
+      {isFormEdited ? (
+        <>
+          <Button
+            variant="primary"
+            type="submit"
+            className="w-28 h-9 bg-blue-800 border-none text-white mt-16 mb-10"
+          >
+            Update
+          </Button>
+          <Button
+            variant="secondary"
+            className="w-28 h-9 bg-gray-500 border-none text-white mt-16 mb-10 ml-3"
+            onClick={() => {
+              setIsFormEdited(false)
+              setDefaultValues({
+                name: "",
+                age: "",
+                email: "",
+                gender: ""
+              })
+            }}
+          >
+            Cancel
+          </Button>
+        </>
+      ) : (
+        <Button
+          variant="success"
+          type="submit"
+          className="bg-green-900 border-none mt-16 mb-10"
+        >
+          Add Data
+        </Button>
+      )}
     </form>
   );
 }

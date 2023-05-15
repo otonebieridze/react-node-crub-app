@@ -1,16 +1,16 @@
 [
   {
-    "id": 1,
-    "name": "Zviad Gogochuri",
-    "age": 26,
+    "name": "zviad gogochuri",
+    "age": "26",
     "email": "zviadgogochuri91@gmail.com",
-    "gender": "male"
+    "gender": "male",
+    "id": 1
   },
   {
-    "name": "Gvanca Mxeidze",
-    "age": 22,
+    "name": "gvanca mxeidze",
+    "age": "23",
     "email": "gvancamxeidze12@gmail.com",
     "gender": "female",
-    "id": "2"
+    "id": 2
   }
 ]

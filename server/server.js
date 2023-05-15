@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 const fs = require("fs");
 
 app.use(bodyParser.json());
+app.use(cors());
 
 let data = JSON.parse(fs.readFileSync("./db/db.json"));
 
@@ -17,7 +19,10 @@ app.get("/users", (req, res, next) => {
 
 app.post("/users", (req, res, next) => {
   const newUser = req.body;
-  const newId = data[data.length - 1].id + 1;
+  let newId = 1;
+  if (data.length > 0) {
+    newId = data[data.length - 1].id + 1;
+  }
 
   newUser.id = newId;
   data.push(newUser);
@@ -27,8 +32,8 @@ app.post("/users", (req, res, next) => {
 });
 
 app.delete("/users/:id", (req, res, next) => {
-  const id = req.params.id;
-  const filteredUsers = data.filter((user) => user.id != id);
+  const id = parseInt(req.params.id);
+  const filteredUsers = data.filter((user) => user.id !== id);
   data = filteredUsers;
 
   fs.writeFileSync("./db/db.json", JSON.stringify(data));
@@ -36,11 +41,13 @@ app.delete("/users/:id", (req, res, next) => {
 });
 
 app.put("/users/:id", (req, res, next) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   const updatedUser = req.body;
   const index = data.findIndex((user) => user.id === id);
 
   data[index] = { ...updatedUser, id: id };
+
+  console.log(data[index]);
 
   fs.writeFileSync("./db/db.json", JSON.stringify(data));
   res.send("User updated!");
