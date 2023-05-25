@@ -1,16 +1,1 @@
-[
-  {
-    "name": "zviad gogochuri",
-    "age": "26",
-    "email": "zviadgogochuri91@gmail.com",
-    "gender": "male",
-    "id": 1
-  },
-  {
-    "name": "gvanca mxeidze",
-    "age": "23",
-    "email": "gvancamxeidze12@gmail.com",
-    "gender": "female",
-    "id": 2
-  }
-]
+[{"name":"zviad gogochuri","age":"26","email":"zviadgogochuri91@gmail.com","gender":"male","id":1},{"name":"gvanca mxeidze","age":"23","email":"gvancamxeidze12@gmail.com","gender":"female","id":2}]
