@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -53,4 +55,4 @@ app.put("/users/:id", (req, res, next) => {
   res.send("User updated!");
 });
 
-app.listen(4001, () => console.log("App listening on port 4001"));
+app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}`));
