@@ -7,13 +7,13 @@ import axios from "axios";
 function Table({ data, setData, setDefaultValues, setIsFormEdited }) {
   useEffect(() => {
     axios
-      .get("http://localhost:4001/users")
+      .get("https://react-node-crud-app-server-production.up.railway.app/users")
       .then((result) => setData(result.data))
       .catch((error) => console.log(error));
   }, [data]);
 
   const handleUserDelete = (id) => {
-    axios.delete(`http://localhost:4001/users/${id}`);
+    axios.delete(`https://react-node-crud-app-server-production.up.railway.app/users/${id}`);
   };
 
   const handleUserEdit = (item) => {

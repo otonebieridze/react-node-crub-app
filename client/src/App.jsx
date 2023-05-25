@@ -18,7 +18,6 @@ function App() {
     <>
       <Header />
       <Hero
-        setData={setData}
         defaultValues={defaultValues}
         setDefaultValues={setDefaultValues}
         isFormEdited={isFormEdited}

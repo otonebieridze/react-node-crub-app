@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 
-function Hero({ setData, defaultValues, setDefaultValues, isFormEdited, setIsFormEdited }) {
+function Hero({ defaultValues, setDefaultValues, isFormEdited, setIsFormEdited }) {
   const {
     register,
     handleSubmit,
@@ -19,10 +19,10 @@ function Hero({ setData, defaultValues, setDefaultValues, isFormEdited, setIsFor
 
   const onSubmit = (data) => {
     if (isFormEdited) {
-      axios.put(`http://localhost:4001/users/${data.id}`, data);
+      axios.put(`https://react-node-crud-app-server-production.up.railway.app/users/${data.id}`, data);
       setIsFormEdited(false);
     } else {
-      axios.post("http://localhost:4001/users", data);
+      axios.post("https://react-node-crud-app-server-production.up.railway.app/users", data);
     }
 
     setDefaultValues({
